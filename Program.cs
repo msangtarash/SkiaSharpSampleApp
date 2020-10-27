@@ -9,40 +9,12 @@ namespace SkiaSharpSampleApp
 {
     class Program
     {
+        ///https://skia.org/user/api/skpaint_overview
+
         const int width = 300, height = 250;
 
         static void Main(string[] args)
         {
-            // create zpl string using https://github.com/BinaryKits/ZPLUtility
-            // you can have a preview at http://labelary.com/viewer.html
-            // and convert zpl to pdf & png
-
-            // create skia sharp canvas and get png & pdf from that
-            // convert either pdf or png to zpl
-
-            {
-                var sampleText = "[_~^][LineBreak\n][The quick fox jumps over the lazy dog.]";
-                ZPLFont font = new ZPLFont(fontWidth: 50, fontHeight: 50);
-                var labelElements = new List<ZPLElementBase>();
-                labelElements.Add(new ZPLTextField(sampleText, 50, 100, font));
-                labelElements.Add(new ZPLGraphicBox(400, 700, 100, 100, 5));
-                labelElements.Add(new ZPLGraphicBox(450, 750, 100, 100, 50, ZPLConstants.LineColor.White));
-                labelElements.Add(new ZPLGraphicCircle(400, 700, 100, 5));
-                labelElements.Add(new ZPLGraphicDiagonalLine(400, 700, 100, 50, 5));
-                labelElements.Add(new ZPLGraphicDiagonalLine(400, 700, 50, 100, 5));
-                labelElements.Add(new ZPLGraphicSymbol(ZPLGraphicSymbol.GraphicSymbolCharacter.Copyright, 600, 600, 50, 50));
-
-                //Add raw ZPL code
-                labelElements.Add(new ZPLRaw("^FO200, 200^GB300, 200, 10 ^FS"));
-
-                var renderEngine = new ZPLEngine(labelElements);
-                var output = renderEngine.ToZPLString(new ZPLRenderOptions() { AddEmptyLineBeforeElementStart = true });
-
-                Console.WriteLine(output);
-            }
-
-            // ------------------------------------------------------------------------------------------------------------------------
-
             {
                 SKImageInfo imageInfo = new SKImageInfo(width, height);
                 using SKSurface surface = SKSurface.Create(imageInfo);
@@ -72,20 +44,17 @@ namespace SkiaSharpSampleApp
 
                 document.Close();
             }
-
-            {
-                string output = Conversion.ConvertPdfPage(File.OpenRead(Path.Combine(AppContext.BaseDirectory, "doc.pdf")));
-            }
-
-            {
-                // Svg.Contrib.Render.ZPL
-            }
         }
 
         static void DrawOnCanvas(SKCanvas canvas)
         {
             canvas.Clear(SKColors.White);
 
+            //AddText(canvas);
+        }
+
+        void AddText(SKCanvas canvas)
+        {
             // draw left-aligned text, solid
             using (SKPaint paint = new SKPaint())
             {
@@ -94,7 +63,7 @@ namespace SkiaSharpSampleApp
                 paint.Color = new SKColor(0x42, 0x81, 0xA4);
                 paint.IsStroke = false;
 
-                canvas.DrawText("Skia1", width / 2f, 64.0f, paint);
+                canvas.DrawText("Skia", width / 2f, 64.0f, paint);
             }
 
             // draw centered text, stroked
@@ -107,7 +76,7 @@ namespace SkiaSharpSampleApp
                 paint.StrokeWidth = 3;
                 paint.TextAlign = SKTextAlign.Center;
 
-                canvas.DrawText("Skia2", width / 2f, 144.0f, paint);
+                canvas.DrawText("Skia", width / 2f, 144.0f, paint);
             }
 
             // draw right-aligned text, scaled
@@ -119,8 +88,9 @@ namespace SkiaSharpSampleApp
                 paint.TextScaleX = 1.5f;
                 paint.TextAlign = SKTextAlign.Right;
 
-                canvas.DrawText("Skia3", width / 2f, 224.0f, paint);
+                canvas.DrawText("Skia", width / 2f, 224.0f, paint);
             }
         }
+
     }
 }
