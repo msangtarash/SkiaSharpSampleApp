@@ -11,7 +11,7 @@ namespace SkiaSharpSampleApp
     {
         ///https://skia.org/user/api/skpaint_overview
 
-        const int width = 300, height = 250;
+        const int width = 210, height = 297;
 
         static void Main(string[] args)
         {
@@ -51,6 +51,26 @@ namespace SkiaSharpSampleApp
             canvas.Clear(SKColors.White);
 
             //AddText(canvas);
+
+            using (SKPaint strokePaint = new SKPaint())
+            {
+                strokePaint.Color = SKColors.Black;
+                strokePaint.Style = SKPaintStyle.Stroke;
+                strokePaint.StrokeWidth = 1;
+
+                int rectangleCount = 20;
+                SKRect rect = new SKRect(0, 0, 38, 63);
+
+                for (int i = 0; i < rectangleCount; i++)
+                {
+                    float xTranslate = (width - rect.Width) / (rectangleCount - i);
+                    float yTranslate = (height - rect.Height) / (rectangleCount - i);
+
+                    canvas.DrawRect(rect, strokePaint);
+                    canvas.Translate(xTranslate, yTranslate);
+                }
+
+            }
         }
 
         void AddText(SKCanvas canvas)
