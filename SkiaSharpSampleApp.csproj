@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PDFtoZPL" Version="1.0.0" />
+    <PackageReference Include="SkiaSharp" Version="2.80.2" />
+    <PackageReference Include="Svg.Contrib.Render.ZPL" Version="0.21.0" />
+    <PackageReference Include="ZPLUtility" Version="1.3.0" />
+  </ItemGroup>
+
+</Project>
