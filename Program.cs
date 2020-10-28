@@ -10,7 +10,7 @@ namespace SkiaSharpSampleApp
 {
     class Program
     {
-        private static int _dpi = 300;
+        private static int _dpi = 203;
 
         private static float _toPixel = _dpi / 25.4f;
 
