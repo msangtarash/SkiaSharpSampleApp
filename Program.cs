@@ -4,112 +4,72 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SkiaSharpSampleApp
 {
     class Program
     {
-        ///https://skia.org/user/api/skpaint_overview
+        private static int _dpi = 300;
 
-        const int width = 210, height = 297;
+        private static float _toPixel = _dpi / 25.4f;
+
 
         static void Main(string[] args)
         {
-            {
-                SKImageInfo imageInfo = new SKImageInfo(width, height);
-                using SKSurface surface = SKSurface.Create(imageInfo);
-                SKCanvas canvas = surface.Canvas;
-                DrawOnCanvas(canvas);
-                using SKImage image = surface.Snapshot();
-                using SKData data = image.Encode(SKEncodedImageFormat.Png, 80);
-                using FileStream stream = File.OpenWrite(Path.Combine(AppContext.BaseDirectory, "image.png"));
-                data.SaveTo(stream);
-            }
+            var labelModels = GetListOfLayoutModelsToPrint();
 
-            {
-                using SKFileWStream stream = new SKFileWStream(Path.Combine(AppContext.BaseDirectory, "doc.pdf"));
-                using SKDocument document = SKDocument.CreatePdf(stream, 203);
-                using SKPaint paint = new SKPaint
-                {
-                    TextSize = 64.0f,
-                    IsAntialias = true,
-                    Color = 0xFF9CAFB7,
-                    IsStroke = true,
-                    StrokeWidth = 3,
-                    TextAlign = SKTextAlign.Center
-                };
+            var layoutTemlate = CreateLayoutTemplate();
 
-                using SKCanvas pdfCanvas = document.BeginPage(width, height);
-                DrawOnCanvas(pdfCanvas);
+            LabelLayoutCalculator calculator = new LabelLayoutCalculator(layoutTemlate);
 
-                document.Close();
-            }
+            calculator.Calculate(labelModels);
+
+            LabelDrawer labelDrawer = new LabelDrawer(layoutTemlate, labelModels);
+
+            labelDrawer.CreateImage(_toPixel);
+
+            labelDrawer.CreatePdf(_toPixel , _dpi);
         }
 
-        static void DrawOnCanvas(SKCanvas canvas)
+        static List<LabelModel> GetListOfLayoutModelsToPrint()
         {
-            canvas.Clear(SKColors.White);
-
-            //AddText(canvas);
-
-            using (SKPaint strokePaint = new SKPaint())
+            return new List<LabelModel>
             {
-                strokePaint.Color = SKColors.Black;
-                strokePaint.Style = SKPaintStyle.Stroke;
-                strokePaint.StrokeWidth = 1;
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name1" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name2" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name3" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name4" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name5" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name6" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name7" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name8" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name9" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name10" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name11" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name12" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name13" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+            };
 
-                int rectangleCount = 20;
-                SKRect rect = new SKRect(0, 0, 38, 63);
-
-                for (int i = 0; i < rectangleCount; i++)
-                {
-                    float xTranslate = (width - rect.Width) / (rectangleCount - i);
-                    float yTranslate = (height - rect.Height) / (rectangleCount - i);
-
-                    canvas.DrawRect(rect, strokePaint);
-                    canvas.Translate(xTranslate, yTranslate);
-                }
-
-            }
         }
 
-        void AddText(SKCanvas canvas)
+        private static LayoutTemlate CreateLayoutTemplate()
         {
-            // draw left-aligned text, solid
-            using (SKPaint paint = new SKPaint())
+            return new LayoutTemlate
             {
-                paint.TextSize = 64.0f;
-                paint.IsAntialias = true;
-                paint.Color = new SKColor(0x42, 0x81, 0xA4);
-                paint.IsStroke = false;
-
-                canvas.DrawText("Skia", width / 2f, 64.0f, paint);
-            }
-
-            // draw centered text, stroked
-            using (var paint = new SKPaint())
-            {
-                paint.TextSize = 64.0f;
-                paint.IsAntialias = true;
-                paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-                paint.IsStroke = true;
-                paint.StrokeWidth = 3;
-                paint.TextAlign = SKTextAlign.Center;
-
-                canvas.DrawText("Skia", width / 2f, 144.0f, paint);
-            }
-
-            // draw right-aligned text, scaled
-            using (var paint = new SKPaint())
-            {
-                paint.TextSize = 64.0f;
-                paint.IsAntialias = true;
-                paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-                paint.TextScaleX = 1.5f;
-                paint.TextAlign = SKTextAlign.Right;
-
-                canvas.DrawText("Skia", width / 2f, 224.0f, paint);
-            }
+                BoxHeight = 38.1f * _toPixel,
+                BoxWidth = 63.5f * _toPixel,
+                PageHeight = 297f * _toPixel,
+                PageWidth = 210f * _toPixel,
+                BoxPadding = 1.2f * _toPixel,
+                ColumnsCount = 3,
+                ColumnSpacing = 2.5f * _toPixel,
+                LeftMargin = 8.6f * _toPixel,
+                TopMargin = 15.1f * _toPixel,
+                RowsCount = 7,
+                ProductNameLeft = 3 * _toPixel,
+                ProductNameTop = 3 * _toPixel
+            };
         }
 
     }
