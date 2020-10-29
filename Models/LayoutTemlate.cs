@@ -22,7 +22,6 @@ namespace SkiaSharpSampleApp.Models
         public LabelDimensions SalePrice { get; set; }
         public LabelDimensions Sku { get; set; }
         public LabelDimensions Barcode { get; set; }
-        public LabelDimensions BarcodeNumber { get; set; }
         public int PageWidthInt => (int)Math.Ceiling(PageWidth);
         public int PageHeightInt => (int)Math.Ceiling(PageHeight);
 
@@ -70,8 +69,7 @@ namespace SkiaSharpSampleApp.Models
             },
             Barcode = new LabelDimensions
             {
-                TextSize = 2 * _toPixel,
-                Top = 32 * _toPixel,
+                Top = 28 * _toPixel,
             },
         };
     }

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using ZXing;
+using ZXing.Common;
 
 namespace SkiaSharpSampleApp
 {
@@ -124,15 +126,21 @@ namespace SkiaSharpSampleApp
                     canvas.DrawText(label.Sku.Title, label.Sku.Left, label.Sku.Top, skuPaint);
                 }
 
-                using (SKPaint barCodeNumberPaint = new SKPaint())
+                var barcodeWriter = new ZXing.SkiaSharp.BarcodeWriter()
                 {
+                    Format = BarcodeFormat.CODE_128,
 
-                    barCodeNumberPaint.Color = SKColors.Black;
+                    Options = new ZXing.Common.EncodingOptions
+                    {
+                        Height = 50,
+                        Width = 350,
+                    },                   
+                };
 
-                    barCodeNumberPaint.TextSize = _layoutTemlate.Barcode.TextSize;
+                SKBitmap bitmap = barcodeWriter.Write(label.Barcode.Title);
 
-                    canvas.DrawText(label.BarcodeNumber.Title, label.BarcodeNumber.Left, label.BarcodeNumber.Top, barCodeNumberPaint);
-                }
+                canvas.DrawBitmap(bitmap, new SKPoint { X = label.Barcode.Left , Y = label.Barcode.Top });
+
             }
 
         }

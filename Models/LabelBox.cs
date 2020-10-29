@@ -21,7 +21,6 @@ namespace SkiaSharpSampleApp.Models
 
         public LabelCordinations Barcode { get; set; }
 
-        public LabelCordinations BarcodeNumber { get; set; }
     }
 
     public class LabelCordinations
