@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using SkiaSharpSampleApp.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -90,20 +91,16 @@ namespace SkiaSharpSampleApp
                 {
                     bussinesNamePaint.Color = SKColors.Black;
 
-                    bussinesNamePaint.TextSize = _layoutTemlate.BussinesNameSize;
+                    bussinesNamePaint.TextSize = _layoutTemlate.BussinesNameTextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(bussinesNamePaint, label.BussinesName, label.Left);
-
-                    float yText = label.Top + _layoutTemlate.BussinesNameTop;
-
-                    canvas.DrawText(label.BussinesName, xText, yText, bussinesNamePaint);
+                    canvas.DrawText(label.BussinesName, label.BusinessNameLeft, label.BusinessNameTop, bussinesNamePaint);
                 }
 
                 using (SKPaint salePricePaint = new SKPaint())
                 {
                     salePricePaint.Color = SKColors.Blue;
 
-                    salePricePaint.TextSize = _layoutTemlate.SalePriceSize;
+                    salePricePaint.TextSize = _layoutTemlate.SalePriceTextSize;
 
                     float xText = CalculateXToCenterTextOnFram(salePricePaint, label.SalePrice, label.Left);
 
@@ -116,7 +113,7 @@ namespace SkiaSharpSampleApp
                 {
                     productNamePaint.Color = SKColors.Black;
 
-                    productNamePaint.TextSize = _layoutTemlate.ProductNameSize;
+                    productNamePaint.TextSize = _layoutTemlate.ProductNameTextSize;
 
                     float xText = CalculateXToCenterTextOnFram(productNamePaint, label.ProductName, label.Left);
 
@@ -130,7 +127,7 @@ namespace SkiaSharpSampleApp
 
                     skuPaint.Color = SKColors.Black;
 
-                    skuPaint.TextSize = _layoutTemlate.SkuSize;
+                    skuPaint.TextSize = _layoutTemlate.SkuTextSize;
 
                     float xText = CalculateXToCenterTextOnFram(skuPaint, label.Sku, label.Left);
 
@@ -144,7 +141,7 @@ namespace SkiaSharpSampleApp
 
                     barCodeNumberPaint.Color = SKColors.Black;
 
-                    barCodeNumberPaint.TextSize = _layoutTemlate.BarcodeSize;
+                    barCodeNumberPaint.TextSize = _layoutTemlate.BarcodeTextSize;
 
                     float xText = CalculateXToCenterTextOnFram(barCodeNumberPaint, label.BarcodeNumber, label.Left);
 

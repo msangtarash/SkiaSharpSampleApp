@@ -1,6 +1,5 @@
-﻿using BinaryKits.Utility.ZPLUtility;
-using PDFtoZPL;
-using SkiaSharp;
+﻿using SkiaSharp;
+using SkiaSharpSampleApp.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +25,7 @@ namespace SkiaSharpSampleApp
 
             var pageCount = mod == 0 ? div : div + 1;
 
-            var labelPages = Enumerable.Range(1, pageCount).Select(p => new LabelPage() { PageNumber = p}).ToList();
+            var labelPages = Enumerable.Range(1, pageCount).Select(p => new LabelPage() { PageNumber = p }).ToList();
 
             labelPages.ForEach(p =>
             {
@@ -51,8 +50,11 @@ namespace SkiaSharpSampleApp
                     b.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.BoxHeight;
 
                     b.ProductNameTop = _layoutTemlate.ProductNameTop + b.Top;
-
                     b.ProductNameLeft = _layoutTemlate.ProductNameLeft + b.Left;
+
+                    b.BusinessNameTop = b.Top + _layoutTemlate.BussinesNameTop;
+                    b.BusinessNameLeft = CalculateCenteredTextX(_layoutTemlate.BussinesNameTextSize, b.BussinesName, b.Left);
+
                 });
 
             });
@@ -62,5 +64,15 @@ namespace SkiaSharpSampleApp
         }
 
 
+        private float CalculateCenteredTextX(float textSize, string str, float boxLeft)
+        {
+            using (SKPaint textPaint = new SKPaint())
+            {
+                textPaint.TextSize = _layoutTemlate.BussinesNameTextSize;
+                float textWidth = textPaint.MeasureText(str);
+                float xText = boxLeft + _layoutTemlate.BoxWidth / 2 - textWidth / 2;
+                return xText;
+            }
+        }
     }
 }
