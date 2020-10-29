@@ -13,28 +13,38 @@ namespace SkiaSharpSampleApp
 
         private LayoutTemlate _layoutTemlate;
 
-        private List<LabelModel> _labelModels;
+        private List<LabelPage> _pages;
 
-        public LabelDrawer(LayoutTemlate layoutTemlate , List<LabelModel> labelModels)
+        public LabelDrawer(LayoutTemlate layoutTemlate, List<LabelPage> pages)
         {
             _layoutTemlate = layoutTemlate;
 
-            _labelModels = labelModels;
+            _pages = pages;
         }
 
-        public void CreateImage(float toPixel)
+        public void CreateImages(float toPixel)
+        {
+            _pages.ForEach(p => CreateImage(toPixel, p));
+        }
+
+        private void CreateImage(float toPixel, LabelPage labelPage)
         {
             SKImageInfo imageInfo = new SKImageInfo(_layoutTemlate.PageWidthInt, _layoutTemlate.PageHeightInt);
             using SKSurface surface = SKSurface.Create(imageInfo);
             SKCanvas canvas = surface.Canvas;
-            DrawOnCanvas(canvas , toPixel);
+            DrawOnCanvas(canvas, toPixel, labelPage);
             using SKImage image = surface.Snapshot();
             using SKData data = image.Encode(SKEncodedImageFormat.Png, 80);
-            using FileStream stream = File.OpenWrite(Path.Combine(AppContext.BaseDirectory, "image.png"));
+            using FileStream stream = File.OpenWrite(Path.Combine(AppContext.BaseDirectory, $"image{labelPage.PageNumber}.png"));
             data.SaveTo(stream);
         }
 
-        public void CreatePdf(float toPixel , int dpi)
+        public void CreatePdfs(float toPixel, int dpi)
+        {
+            _pages.ForEach(p => CreatePdf(toPixel, dpi, p));
+        }
+
+        public void CreatePdf(float toPixel, int dpi, LabelPage labelPage)
         {
             using SKFileWStream stream = new SKFileWStream(Path.Combine(AppContext.BaseDirectory, "doc.pdf"));
 
@@ -42,16 +52,16 @@ namespace SkiaSharpSampleApp
 
             using SKCanvas pdfCanvas = document.BeginPage(_layoutTemlate.PageWidthInt, _layoutTemlate.PageHeightInt);
 
-            DrawOnCanvas(pdfCanvas , toPixel);
+            DrawOnCanvas(pdfCanvas, toPixel, labelPage);
 
             document.Close();
         }
 
-        public void DrawOnCanvas(SKCanvas canvas , float toPixel)
+        public void DrawOnCanvas(SKCanvas canvas, float toPixel, LabelPage page)
         {
             canvas.Clear(SKColors.White);
 
-            foreach (var model in _labelModels)
+            foreach (var label in page.Labels)
             {
                 using (SKPaint framePaint = new SKPaint())
                 {
@@ -63,8 +73,8 @@ namespace SkiaSharpSampleApp
 
                     frameRect.Location = new SKPoint
                     {
-                        X = model.Left,
-                        Y = model.Top,
+                        X = label.Left,
+                        Y = label.Top,
                     };
 
                     frameRect.Size = new SKSize
@@ -82,11 +92,11 @@ namespace SkiaSharpSampleApp
 
                     bussinesNamePaint.TextSize = ((int)(7 * toPixel));
 
-                    float xText = CalculateXToCenterTextOnFram(bussinesNamePaint, model.BussinesName, model.Left);
+                    float xText = CalculateXToCenterTextOnFram(bussinesNamePaint, label.BussinesName, label.Left);
 
-                    float yText = model.Top + ((int)(6 * toPixel));
+                    float yText = label.Top + ((int)(6 * toPixel));
 
-                    canvas.DrawText(model.BussinesName, xText, yText, bussinesNamePaint);
+                    canvas.DrawText(label.BussinesName, xText, yText, bussinesNamePaint);
                 }
 
                 using (SKPaint salePricePaint = new SKPaint())
@@ -95,11 +105,11 @@ namespace SkiaSharpSampleApp
 
                     salePricePaint.TextSize = ((int)(5 * toPixel));
 
-                    float xText = CalculateXToCenterTextOnFram(salePricePaint, model.SalePrice, model.Left);
+                    float xText = CalculateXToCenterTextOnFram(salePricePaint, label.SalePrice, label.Left);
 
-                    float yText = model.Top + ((int)(17 * toPixel));
+                    float yText = label.Top + ((int)(17 * toPixel));
 
-                    canvas.DrawText(model.SalePrice, xText, yText, salePricePaint);
+                    canvas.DrawText(label.SalePrice, xText, yText, salePricePaint);
                 }
 
                 using (SKPaint productNamePaint = new SKPaint())
@@ -108,11 +118,11 @@ namespace SkiaSharpSampleApp
 
                     productNamePaint.TextSize = ((int)(3 * toPixel));
 
-                    float xText = CalculateXToCenterTextOnFram(productNamePaint, model.ProductName, model.Left);
+                    float xText = CalculateXToCenterTextOnFram(productNamePaint, label.ProductName, label.Left);
 
-                    float yText = model.Top + ((int)(20 * toPixel));
+                    float yText = label.Top + ((int)(20 * toPixel));
 
-                    canvas.DrawText(model.ProductName, xText, yText, productNamePaint);
+                    canvas.DrawText(label.ProductName, xText, yText, productNamePaint);
                 }
 
                 using (SKPaint skuPaint = new SKPaint())
@@ -122,11 +132,11 @@ namespace SkiaSharpSampleApp
 
                     skuPaint.TextSize = ((int)(3 * toPixel));
 
-                    float xText = CalculateXToCenterTextOnFram(skuPaint, model.Sku, model.Left);
+                    float xText = CalculateXToCenterTextOnFram(skuPaint, label.Sku, label.Left);
 
-                    float yText = model.Top + ((int)(26 * toPixel));
+                    float yText = label.Top + ((int)(26 * toPixel));
 
-                    canvas.DrawText(model.Sku, xText, yText, skuPaint);
+                    canvas.DrawText(label.Sku, xText, yText, skuPaint);
                 }
 
                 using (SKPaint barCodeNumberPaint = new SKPaint())
@@ -136,17 +146,17 @@ namespace SkiaSharpSampleApp
 
                     barCodeNumberPaint.TextSize = ((int)(2 * toPixel));
 
-                    float xText = CalculateXToCenterTextOnFram(barCodeNumberPaint, model.BarcodeNumber, model.Left);
+                    float xText = CalculateXToCenterTextOnFram(barCodeNumberPaint, label.BarcodeNumber, label.Left);
 
-                    float yText = model.Top + ((int)(32 * toPixel));
+                    float yText = label.Top + ((int)(32 * toPixel));
 
-                    canvas.DrawText(model.BarcodeNumber, xText, yText, barCodeNumberPaint);
+                    canvas.DrawText(label.BarcodeNumber, xText, yText, barCodeNumberPaint);
                 }
             }
 
         }
 
-         float CalculateXToCenterTextOnFram(SKPaint textPaint, string str, float x)
+        float CalculateXToCenterTextOnFram(SKPaint textPaint, string str, float x)
         {
             float textWidth = textPaint.MeasureText(str);
 

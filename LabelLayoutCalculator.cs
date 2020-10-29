@@ -16,31 +16,48 @@ namespace SkiaSharpSampleApp
             _layoutTemlate = layoutTemlate;
         }
 
-        public void Calculate(List<LabelModel> labelModels)
+        public List<LabelPage> Calculate(List<LabelBox> labelBoxes)
         {
-            var index = 0;
+            var pageSize = _layoutTemlate.ColumnsCount * _layoutTemlate.RowsCount;
 
-            labelModels.ForEach(m =>
+            var div = labelBoxes.Count / pageSize;
+
+            var mod = labelBoxes.Count % pageSize;
+
+            var pageCount = mod == 0 ? div : div + 1;
+
+            var labelPages = Enumerable.Range(1, pageCount).Select(p => new LabelPage() { PageNumber = p}).ToList();
+
+            labelPages.ForEach(p =>
             {
-                index++;
+                p.Labels = labelBoxes.Skip((p.PageNumber - 1) * pageSize).Take(pageSize).ToList();
 
-                int mod = index % _layoutTemlate.ColumnsCount;
+                var index = 0;
 
-                int columnIndext = mod == 0 ? _layoutTemlate.ColumnsCount : mod;
+                p.Labels.ForEach(b =>
+                {
+                    index++;
 
-                m.Left = _layoutTemlate.LeftMargin + (columnIndext - 1) * (_layoutTemlate.ColumnSpacing + _layoutTemlate.BoxWidth);
+                    int mod = index % _layoutTemlate.ColumnsCount;
 
-                int div = index / _layoutTemlate.ColumnsCount;
+                    int columnIndext = mod == 0 ? _layoutTemlate.ColumnsCount : mod;
 
-                int rowIndext = mod == 0 ? div : div + 1;
+                    b.Left = _layoutTemlate.LeftMargin + (columnIndext - 1) * (_layoutTemlate.ColumnSpacing + _layoutTemlate.BoxWidth);
 
-                m.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.BoxHeight;
+                    int div = index / _layoutTemlate.ColumnsCount;
 
-                m.ProductNameTop = _layoutTemlate.ProductNameTop + m.Top;
+                    int rowIndext = mod == 0 ? div : div + 1;
 
-                m.ProductNameLeft = _layoutTemlate.ProductNameLeft + m.Left;
+                    b.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.BoxHeight;
+
+                    b.ProductNameTop = _layoutTemlate.ProductNameTop + b.Top;
+
+                    b.ProductNameLeft = _layoutTemlate.ProductNameLeft + b.Left;
+                });
+
             });
 
+            return labelPages;
 
         }
 

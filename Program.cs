@@ -23,32 +23,42 @@ namespace SkiaSharpSampleApp
 
             LabelLayoutCalculator calculator = new LabelLayoutCalculator(layoutTemlate);
 
-            calculator.Calculate(labelModels);
+            var pages = calculator.Calculate(labelModels);
 
-            LabelDrawer labelDrawer = new LabelDrawer(layoutTemlate, labelModels);
+            LabelDrawer labelDrawer = new LabelDrawer(layoutTemlate, pages);
 
-            labelDrawer.CreateImage(_toPixel);
+            labelDrawer.CreateImages(_toPixel);
 
-            labelDrawer.CreatePdf(_toPixel , _dpi);
+            //labelDrawer.CreatePdfs(_toPixel , _dpi);
         }
 
-        static List<LabelModel> GetListOfLayoutModelsToPrint()
+        static List<LabelBox> GetListOfLayoutModelsToPrint()
         {
-            return new List<LabelModel>
+            return new List<LabelBox>
             {
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name1" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name2" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name3" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name4" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name5" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name6" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name7" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name8" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name9" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name10" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name11" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name12" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
-                new LabelModel{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name13" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name1" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name2" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name3" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name4" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name5" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name6" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name7" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name8" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name9" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name10" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name11" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name12" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name13" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name14" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name15" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name16" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name17" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name18" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber="2544585454558" , ProductName = "T-shirt" , BussinesName ="Bussines Name19" , SalePrice = "200 $" , Sku = "T-4545-r-l"},
+                new LabelBox{ BarcodeNumber = "2544585454558", ProductName = "T-shirt", BussinesName = "Bussines Name20", SalePrice = "200 $", Sku = "T-4545-r-l" },
+                new LabelBox{ BarcodeNumber = "2544585454558", ProductName = "T-shirt", BussinesName = "Bussines Name21", SalePrice = "200 $", Sku = "T-4545-r-l" },
+                new LabelBox{ BarcodeNumber = "2544585454558", ProductName = "T-shirt", BussinesName = "Bussines Name22", SalePrice = "200 $", Sku = "T-4545-r-l" },
+                new LabelBox{ BarcodeNumber = "2544585454558", ProductName = "T-shirt", BussinesName = "Bussines Name23", SalePrice = "200 $", Sku = "T-4545-r-l" },
             };
 
         }

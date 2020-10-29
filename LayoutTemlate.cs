@@ -20,10 +20,14 @@ namespace SkiaSharpSampleApp
         public float BoxPadding { get; set; }
         public float ProductNameTop { get; set; }
         public float ProductNameLeft { get; set; }
-
         public int PageWidthInt => (int)Math.Ceiling(PageWidth);
         public int PageHeightInt => (int)Math.Ceiling(PageHeight);
     }
 
+    public class Coordinat
+    {
+        public float Top { get; set; }
+        public float Left { get; set; }
+    }
 
 }

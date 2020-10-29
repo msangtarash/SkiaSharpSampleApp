@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SkiaSharpSampleApp
 {
-    public class LabelModel
+    public class LabelBox
     {
         public float Top { get; set; }
         public float Left { get; set; }
