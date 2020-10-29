@@ -41,20 +41,20 @@ namespace SkiaSharpSampleApp
 
         public void CreatePdfs(float toPixel, int dpi)
         {
-            _pages.ForEach(p => CreatePdf(toPixel, dpi, p));
-        }
-
-        public void CreatePdf(float toPixel, int dpi, LabelPage labelPage)
-        {
             using SKFileWStream stream = new SKFileWStream(Path.Combine(AppContext.BaseDirectory, "doc.pdf"));
 
             using SKDocument document = SKDocument.CreatePdf(stream, dpi);
 
+            _pages.ForEach(p => CreatePdf(toPixel, p,document));
+
+            document.Close();
+        }
+
+        public void CreatePdf(float toPixel, LabelPage labelPage , SKDocument document)
+        {
             using SKCanvas pdfCanvas = document.BeginPage(_layoutTemlate.PageWidthInt, _layoutTemlate.PageHeightInt);
 
             DrawOnCanvas(pdfCanvas, toPixel, labelPage);
-
-            document.Close();
         }
 
         public void DrawOnCanvas(SKCanvas canvas, float toPixel, LabelPage page)

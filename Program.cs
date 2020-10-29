@@ -29,7 +29,7 @@ namespace SkiaSharpSampleApp
 
             labelDrawer.CreateImages(_toPixel);
 
-            //labelDrawer.CreatePdfs(_toPixel , _dpi);
+            labelDrawer.CreatePdfs(_toPixel , _dpi);
         }
 
         static List<LabelBox> GetListOfLayoutModelsToPrint()
