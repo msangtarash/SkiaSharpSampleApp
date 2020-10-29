@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkiaSharpSampleApp
+namespace SkiaSharpSampleApp.Models
 {
     public class LabelPage
     {

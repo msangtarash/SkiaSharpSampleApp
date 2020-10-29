@@ -67,7 +67,7 @@ namespace SkiaSharpSampleApp
                 using (SKPaint framePaint = new SKPaint())
                 {
                     framePaint.Style = SKPaintStyle.Stroke;
-                    framePaint.StrokeWidth = _layoutTemlate.BoxStrokeWidth;
+                    framePaint.StrokeWidth = _layoutTemlate.Box.StrokeWidth;
                     framePaint.Color = SKColors.Gray;
 
                     SKRect frameRect = new SKRect();
@@ -80,46 +80,46 @@ namespace SkiaSharpSampleApp
 
                     frameRect.Size = new SKSize
                     {
-                        Width = _layoutTemlate.BoxWidth,
-                        Height = _layoutTemlate.BoxHeight,
+                        Width = _layoutTemlate.Box.Width,
+                        Height = _layoutTemlate.Box.Height,
                     };
 
-                    canvas.DrawRoundRect(frameRect, _layoutTemlate.BoxXReduce, _layoutTemlate.BoxYReduce, framePaint);
+                    canvas.DrawRoundRect(frameRect, _layoutTemlate.Box.XReduce, _layoutTemlate.Box.YReduce, framePaint);
                 }
 
-                using (SKPaint bussinesNamePaint = new SKPaint())
+                using (SKPaint businessNamePaint = new SKPaint())
                 {
-                    bussinesNamePaint.Color = SKColors.Black;
+                    businessNamePaint.Color = SKColors.Black;
 
-                    bussinesNamePaint.TextSize = _layoutTemlate.BussinesNameTextSize;
+                    businessNamePaint.TextSize = _layoutTemlate.BusinessName.TextSize;
 
-                    canvas.DrawText(label.BussinesName, label.BusinessNameLeft, label.BusinessNameTop, bussinesNamePaint);
+                    canvas.DrawText(label.BusinessName.Title, label.BusinessName.Left, label.BusinessName.Top, businessNamePaint);
                 }
 
                 using (SKPaint salePricePaint = new SKPaint())
                 {
                     salePricePaint.Color = SKColors.Blue;
 
-                    salePricePaint.TextSize = _layoutTemlate.SalePriceTextSize;
+                    salePricePaint.TextSize = _layoutTemlate.SalePrice.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(salePricePaint, label.SalePrice, label.Left);
+                    float xText = CalculateXToCenterTextOnFram(salePricePaint, label.SalePrice.Title, label.Left);
 
-                    float yText = label.Top + _layoutTemlate.SalePriceTop;
+                    float yText = label.Top + _layoutTemlate.SalePrice.Top;
 
-                    canvas.DrawText(label.SalePrice, xText, yText, salePricePaint);
+                    canvas.DrawText(label.SalePrice.Title, xText, yText, salePricePaint);
                 }
 
                 using (SKPaint productNamePaint = new SKPaint())
                 {
                     productNamePaint.Color = SKColors.Black;
 
-                    productNamePaint.TextSize = _layoutTemlate.ProductNameTextSize;
+                    productNamePaint.TextSize = _layoutTemlate.ProductName.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(productNamePaint, label.ProductName, label.Left);
+                    float xText = CalculateXToCenterTextOnFram(productNamePaint, label.ProductName.Title, label.Left);
 
-                    float yText = label.Top + _layoutTemlate.ProductNameTop;
+                    float yText = label.Top + _layoutTemlate.ProductName.Top;
 
-                    canvas.DrawText(label.ProductName, xText, yText, productNamePaint);
+                    canvas.DrawText(label.ProductName.Title, xText, yText, productNamePaint);
                 }
 
                 using (SKPaint skuPaint = new SKPaint())
@@ -127,13 +127,13 @@ namespace SkiaSharpSampleApp
 
                     skuPaint.Color = SKColors.Black;
 
-                    skuPaint.TextSize = _layoutTemlate.SkuTextSize;
+                    skuPaint.TextSize = _layoutTemlate.Sku.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(skuPaint, label.Sku, label.Left);
+                    float xText = CalculateXToCenterTextOnFram(skuPaint, label.Sku.Title, label.Left);
 
-                    float yText = label.Top + _layoutTemlate.SkuTop;
+                    float yText = label.Top + _layoutTemlate.Sku.Top;
 
-                    canvas.DrawText(label.Sku, xText, yText, skuPaint);
+                    canvas.DrawText(label.Sku.Title, xText, yText, skuPaint);
                 }
 
                 using (SKPaint barCodeNumberPaint = new SKPaint())
@@ -141,13 +141,13 @@ namespace SkiaSharpSampleApp
 
                     barCodeNumberPaint.Color = SKColors.Black;
 
-                    barCodeNumberPaint.TextSize = _layoutTemlate.BarcodeTextSize;
+                    barCodeNumberPaint.TextSize = _layoutTemlate.Barcode.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(barCodeNumberPaint, label.BarcodeNumber, label.Left);
+                    float xText = CalculateXToCenterTextOnFram(barCodeNumberPaint, label.BarcodeNumber.Title, label.Left);
 
-                    float yText = label.Top + _layoutTemlate.BarcodeTop;
+                    float yText = label.Top + _layoutTemlate.Barcode.Top;
 
-                    canvas.DrawText(label.BarcodeNumber, xText, yText, barCodeNumberPaint);
+                    canvas.DrawText(label.BarcodeNumber.Title, xText, yText, barCodeNumberPaint);
                 }
             }
 
@@ -158,7 +158,7 @@ namespace SkiaSharpSampleApp
             float textWidth = textPaint.MeasureText(str);
 
             // Calculate offsets to center the text horizontaly on the fram
-            float xText = x + _layoutTemlate.BoxWidth / 2 - textWidth / 2;
+            float xText = x + _layoutTemlate.Box.Width / 2 - textWidth / 2;
 
             return xText;
         }

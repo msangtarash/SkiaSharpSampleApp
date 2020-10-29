@@ -41,19 +41,19 @@ namespace SkiaSharpSampleApp
 
                     int columnIndext = mod == 0 ? _layoutTemlate.ColumnsCount : mod;
 
-                    b.Left = _layoutTemlate.LeftMargin + (columnIndext - 1) * (_layoutTemlate.ColumnSpacing + _layoutTemlate.BoxWidth);
+                    b.Left = _layoutTemlate.LeftMargin + (columnIndext - 1) * (_layoutTemlate.ColumnSpacing + _layoutTemlate.Box.Width);
 
                     int div = index / _layoutTemlate.ColumnsCount;
 
                     int rowIndext = mod == 0 ? div : div + 1;
 
-                    b.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.BoxHeight;
+                    b.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.Box.Height;
 
-                    b.ProductNameTop = _layoutTemlate.ProductNameTop + b.Top;
-                    b.ProductNameLeft = _layoutTemlate.ProductNameLeft + b.Left;
+                    b.ProductName.Top = _layoutTemlate.ProductName.Top + b.Top;
+                    b.ProductName.Left = _layoutTemlate.ProductName.Left + b.Left;
 
-                    b.BusinessNameTop = b.Top + _layoutTemlate.BussinesNameTop;
-                    b.BusinessNameLeft = CalculateCenteredTextX(_layoutTemlate.BussinesNameTextSize, b.BussinesName, b.Left);
+                    b.BusinessName.Top = b.Top + _layoutTemlate.BusinessName.Top;
+                    b.BusinessName.Left = CalculateCenteredTextX(_layoutTemlate.BusinessName.TextSize, b.BusinessName.Title, b.Left);
 
                 });
 
@@ -68,9 +68,9 @@ namespace SkiaSharpSampleApp
         {
             using (SKPaint textPaint = new SKPaint())
             {
-                textPaint.TextSize = _layoutTemlate.BussinesNameTextSize;
+                textPaint.TextSize = _layoutTemlate.BusinessName.TextSize;
                 float textWidth = textPaint.MeasureText(str);
-                float xText = boxLeft + _layoutTemlate.BoxWidth / 2 - textWidth / 2;
+                float xText = boxLeft + _layoutTemlate.Box.Width / 2 - textWidth / 2;
                 return xText;
             }
         }

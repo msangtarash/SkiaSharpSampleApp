@@ -10,16 +10,24 @@ namespace SkiaSharpSampleApp.Models
     {
         public float Top { get; set; }
         public float Left { get; set; }
-        public string ProductName { get; set; }
-        public float ProductNameTop { get; set; }
-        public float ProductNameLeft { get; set; }
-        public string SalePrice { get; set; }
-        public string Sku { get; set; }
-        public string BarcodeNumber { get; set; }
 
+        public LabelCordinations BusinessName { get; set; }
 
-        public string BussinesName { get; set; }
-        public float BusinessNameTop { get; set; }
-        public float BusinessNameLeft { get; set; }
+        public LabelCordinations ProductName { get; set; }
+
+        public LabelCordinations SalePrice { get; set; }
+
+        public LabelCordinations Sku { get; set; }
+
+        public LabelCordinations Barcode { get; set; }
+
+        public LabelCordinations BarcodeNumber { get; set; }
+    }
+
+    public class LabelCordinations
+    {
+        public float Top { get; set; }
+        public float Left { get; set; }
+        public string Title { get; set; }
     }
 }
