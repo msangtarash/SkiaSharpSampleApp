@@ -49,11 +49,23 @@ namespace SkiaSharpSampleApp
 
                     b.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.Box.Height;
 
-                    b.ProductName.Top = _layoutTemlate.ProductName.Top + b.Top;
-                    b.ProductName.Left = _layoutTemlate.ProductName.Left + b.Left;
-
                     b.BusinessName.Top = b.Top + _layoutTemlate.BusinessName.Top;
                     b.BusinessName.Left = CalculateCenteredTextX(_layoutTemlate.BusinessName.TextSize, b.BusinessName.Title, b.Left);
+
+                    b.ProductName.Top = _layoutTemlate.ProductName.Top + b.Top;
+                    b.ProductName.Left = CalculateCenteredTextX(_layoutTemlate.ProductName.TextSize, b.ProductName.Title, b.Left);
+
+                    b.SalePrice.Top = b.Top + _layoutTemlate.SalePrice.Top;
+                    b.SalePrice.Left = CalculateCenteredTextX(_layoutTemlate.SalePrice.TextSize, b.SalePrice.Title, b.Left);
+
+                    b.Sku.Top = b.Top + _layoutTemlate.Sku.Top;
+                    b.BusinessName.Left = CalculateCenteredTextX(_layoutTemlate.Sku.TextSize, b.Sku.Title, b.Left);
+
+                    b.Barcode.Top = b.Top + _layoutTemlate.Barcode.Top;
+                    b.Barcode.Left = b.Left + _layoutTemlate.Barcode.Left;
+
+                    b.BarcodeNumber.Top = b.Top + _layoutTemlate.BarcodeNumber.Top;
+                    b.BarcodeNumber.Left = CalculateCenteredTextX(_layoutTemlate.BarcodeNumber.TextSize, b.BarcodeNumber.Title, b.Left);
 
                 });
 

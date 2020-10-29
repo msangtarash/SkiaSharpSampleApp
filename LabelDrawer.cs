@@ -46,12 +46,12 @@ namespace SkiaSharpSampleApp
 
             using SKDocument document = SKDocument.CreatePdf(stream, dpi);
 
-            _pages.ForEach(p => CreatePdf(toPixel, p,document));
+            _pages.ForEach(p => CreatePdf(toPixel, p, document));
 
             document.Close();
         }
 
-        public void CreatePdf(float toPixel, LabelPage labelPage , SKDocument document)
+        public void CreatePdf(float toPixel, LabelPage labelPage, SKDocument document)
         {
             using SKCanvas pdfCanvas = document.BeginPage(_layoutTemlate.PageWidthInt, _layoutTemlate.PageHeightInt);
 
@@ -102,11 +102,7 @@ namespace SkiaSharpSampleApp
 
                     salePricePaint.TextSize = _layoutTemlate.SalePrice.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(salePricePaint, label.SalePrice.Title, label.Left);
-
-                    float yText = label.Top + _layoutTemlate.SalePrice.Top;
-
-                    canvas.DrawText(label.SalePrice.Title, xText, yText, salePricePaint);
+                    canvas.DrawText(label.SalePrice.Title, label.SalePrice.Left, label.SalePrice.Top, salePricePaint);
                 }
 
                 using (SKPaint productNamePaint = new SKPaint())
@@ -115,11 +111,7 @@ namespace SkiaSharpSampleApp
 
                     productNamePaint.TextSize = _layoutTemlate.ProductName.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(productNamePaint, label.ProductName.Title, label.Left);
-
-                    float yText = label.Top + _layoutTemlate.ProductName.Top;
-
-                    canvas.DrawText(label.ProductName.Title, xText, yText, productNamePaint);
+                    canvas.DrawText(label.ProductName.Title, label.ProductName.Left, label.ProductName.Top, productNamePaint);
                 }
 
                 using (SKPaint skuPaint = new SKPaint())
@@ -129,11 +121,7 @@ namespace SkiaSharpSampleApp
 
                     skuPaint.TextSize = _layoutTemlate.Sku.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(skuPaint, label.Sku.Title, label.Left);
-
-                    float yText = label.Top + _layoutTemlate.Sku.Top;
-
-                    canvas.DrawText(label.Sku.Title, xText, yText, skuPaint);
+                    canvas.DrawText(label.Sku.Title, label.Sku.Left, label.Sku.Top, skuPaint);
                 }
 
                 using (SKPaint barCodeNumberPaint = new SKPaint())
@@ -143,24 +131,10 @@ namespace SkiaSharpSampleApp
 
                     barCodeNumberPaint.TextSize = _layoutTemlate.Barcode.TextSize;
 
-                    float xText = CalculateXToCenterTextOnFram(barCodeNumberPaint, label.BarcodeNumber.Title, label.Left);
-
-                    float yText = label.Top + _layoutTemlate.Barcode.Top;
-
-                    canvas.DrawText(label.BarcodeNumber.Title, xText, yText, barCodeNumberPaint);
+                    canvas.DrawText(label.BarcodeNumber.Title, label.BarcodeNumber.Left, label.BarcodeNumber.Top, barCodeNumberPaint);
                 }
             }
 
-        }
-
-        float CalculateXToCenterTextOnFram(SKPaint textPaint, string str, float x)
-        {
-            float textWidth = textPaint.MeasureText(str);
-
-            // Calculate offsets to center the text horizontaly on the fram
-            float xText = x + _layoutTemlate.Box.Width / 2 - textWidth / 2;
-
-            return xText;
         }
     }
 }
