@@ -8,10 +8,6 @@ namespace SkiaSharpSampleApp
 {
     public class LabelPage
     {
-        public LabelPage()
-        {
-
-        }
         public int PageNumber { get; set; }
         public List<LabelBox> Labels { get; set; }
     }

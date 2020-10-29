@@ -77,8 +77,20 @@ namespace SkiaSharpSampleApp
                 LeftMargin = 8.6f * _toPixel,
                 TopMargin = 15.1f * _toPixel,
                 RowsCount = 7,
-                ProductNameLeft = 3 * _toPixel,
-                ProductNameTop = 3 * _toPixel
+                BoxStrokeWidth = 1,
+                BoxYReduce = 5,
+                BoxXReduce = 5,
+                BussinesNameSize = 7 * _toPixel,
+                BussinesNameTop = 6 * _toPixel,
+                SalePriceSize = 5 * _toPixel,
+                SalePriceTop =17 * _toPixel,
+                ProductNameSize = 3 * _toPixel,
+                ProductNameTop = 20 * _toPixel,
+                SkuSize = 3 * _toPixel,
+                SkuTop = 26 * _toPixel,
+                BarcodeSize = 2 * _toPixel,
+                BarcodeTop = 32 * _toPixel,
+
             };
         }
 

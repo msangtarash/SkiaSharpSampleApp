@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,6 @@ namespace SkiaSharpSampleApp
 {
     public class LabelDrawer
     {
-
         private LayoutTemlate _layoutTemlate;
 
         private List<LabelPage> _pages;
@@ -66,7 +66,7 @@ namespace SkiaSharpSampleApp
                 using (SKPaint framePaint = new SKPaint())
                 {
                     framePaint.Style = SKPaintStyle.Stroke;
-                    framePaint.StrokeWidth = 1;
+                    framePaint.StrokeWidth = _layoutTemlate.BoxStrokeWidth;
                     framePaint.Color = SKColors.Gray;
 
                     SKRect frameRect = new SKRect();
@@ -83,18 +83,18 @@ namespace SkiaSharpSampleApp
                         Height = _layoutTemlate.BoxHeight,
                     };
 
-                    canvas.DrawRoundRect(frameRect, 5, 5, framePaint);
+                    canvas.DrawRoundRect(frameRect, _layoutTemlate.BoxXReduce, _layoutTemlate.BoxYReduce, framePaint);
                 }
 
                 using (SKPaint bussinesNamePaint = new SKPaint())
                 {
                     bussinesNamePaint.Color = SKColors.Black;
 
-                    bussinesNamePaint.TextSize = ((int)(7 * toPixel));
+                    bussinesNamePaint.TextSize = _layoutTemlate.BussinesNameSize;
 
                     float xText = CalculateXToCenterTextOnFram(bussinesNamePaint, label.BussinesName, label.Left);
 
-                    float yText = label.Top + ((int)(6 * toPixel));
+                    float yText = label.Top + _layoutTemlate.BussinesNameTop;
 
                     canvas.DrawText(label.BussinesName, xText, yText, bussinesNamePaint);
                 }
@@ -103,11 +103,11 @@ namespace SkiaSharpSampleApp
                 {
                     salePricePaint.Color = SKColors.Blue;
 
-                    salePricePaint.TextSize = ((int)(5 * toPixel));
+                    salePricePaint.TextSize = _layoutTemlate.SalePriceSize;
 
                     float xText = CalculateXToCenterTextOnFram(salePricePaint, label.SalePrice, label.Left);
 
-                    float yText = label.Top + ((int)(17 * toPixel));
+                    float yText = label.Top + _layoutTemlate.SalePriceTop;
 
                     canvas.DrawText(label.SalePrice, xText, yText, salePricePaint);
                 }
@@ -116,11 +116,11 @@ namespace SkiaSharpSampleApp
                 {
                     productNamePaint.Color = SKColors.Black;
 
-                    productNamePaint.TextSize = ((int)(3 * toPixel));
+                    productNamePaint.TextSize = _layoutTemlate.ProductNameSize;
 
                     float xText = CalculateXToCenterTextOnFram(productNamePaint, label.ProductName, label.Left);
 
-                    float yText = label.Top + ((int)(20 * toPixel));
+                    float yText = label.Top + _layoutTemlate.ProductNameTop;
 
                     canvas.DrawText(label.ProductName, xText, yText, productNamePaint);
                 }
@@ -130,11 +130,11 @@ namespace SkiaSharpSampleApp
 
                     skuPaint.Color = SKColors.Black;
 
-                    skuPaint.TextSize = ((int)(3 * toPixel));
+                    skuPaint.TextSize = _layoutTemlate.SkuSize;
 
                     float xText = CalculateXToCenterTextOnFram(skuPaint, label.Sku, label.Left);
 
-                    float yText = label.Top + ((int)(26 * toPixel));
+                    float yText = label.Top + _layoutTemlate.SkuTop;
 
                     canvas.DrawText(label.Sku, xText, yText, skuPaint);
                 }
@@ -144,11 +144,11 @@ namespace SkiaSharpSampleApp
 
                     barCodeNumberPaint.Color = SKColors.Black;
 
-                    barCodeNumberPaint.TextSize = ((int)(2 * toPixel));
+                    barCodeNumberPaint.TextSize = _layoutTemlate.BarcodeSize;
 
                     float xText = CalculateXToCenterTextOnFram(barCodeNumberPaint, label.BarcodeNumber, label.Left);
 
-                    float yText = label.Top + ((int)(32 * toPixel));
+                    float yText = label.Top + _layoutTemlate.BarcodeTop;
 
                     canvas.DrawText(label.BarcodeNumber, xText, yText, barCodeNumberPaint);
                 }
