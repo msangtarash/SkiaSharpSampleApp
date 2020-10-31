@@ -33,7 +33,7 @@ namespace SkiaSharpSampleApp
 
                 var index = 0;
 
-                p.Labels.ForEach(b =>
+                p.Labels.ForEach(l =>
                 {
                     index++;
 
@@ -41,28 +41,48 @@ namespace SkiaSharpSampleApp
 
                     int columnIndext = mod == 0 ? _layoutTemlate.ColumnsCount : mod;
 
-                    b.Left = _layoutTemlate.LeftMargin + (columnIndext - 1) * (_layoutTemlate.ColumnSpacing + _layoutTemlate.Box.Width);
+                    l.Left = _layoutTemlate.LeftMargin + (columnIndext - 1) * (_layoutTemlate.ColumnSpacing + _layoutTemlate.Box.Width);
 
                     int div = index / _layoutTemlate.ColumnsCount;
 
                     int rowIndext = mod == 0 ? div : div + 1;
 
-                    b.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.Box.Height;
+                    l.Top = _layoutTemlate.TopMargin + (rowIndext - 1) * _layoutTemlate.Box.Height;
 
-                    b.BusinessName.Top = b.Top + _layoutTemlate.BusinessName.Top;
-                    b.BusinessName.Left = CalculateCenteredTextX(_layoutTemlate.BusinessName.TextSize, b.BusinessName.Title, b.Left);
+                    l.Box.Color = _layoutTemlate.Box.Color;
+                    l.Box.Width = _layoutTemlate.Box.Width;
+                    l.Box.Height = _layoutTemlate.Box.Height;
+                    l.Box.StrokeWidth = _layoutTemlate.Box.StrokeWidth;
+                    l.Box.XReduce = _layoutTemlate.Box.XReduce;
+                    l.Box.YReduce = _layoutTemlate.Box.YReduce;
+                    l.Box.Padding = _layoutTemlate.Box.Padding;
 
-                    b.ProductName.Top = b.Top + _layoutTemlate.ProductName.Top;
-                    b.ProductName.Left = CalculateCenteredTextX(_layoutTemlate.ProductName.TextSize, b.ProductName.Title, b.Left);
+                    l.BusinessName.Top = l.Top + _layoutTemlate.BusinessName.Top;
+                    l.BusinessName.Left = CalculateCenteredTextX(_layoutTemlate.BusinessName.TextSize, l.BusinessName.Title, l.Left);
+                    l.BusinessName.TextSize = _layoutTemlate.BusinessName.TextSize;
+                    l.BusinessName.Color = _layoutTemlate.BusinessName.Color;                   
 
-                    b.SalePrice.Top = b.Top + _layoutTemlate.SalePrice.Top;
-                    b.SalePrice.Left = CalculateCenteredTextX(_layoutTemlate.SalePrice.TextSize, b.SalePrice.Title, b.Left);
+                    l.ProductName.Top = l.Top + _layoutTemlate.ProductName.Top;
+                    l.ProductName.Left = CalculateCenteredTextX(_layoutTemlate.ProductName.TextSize, l.ProductName.Title, l.Left);
+                    l.ProductName.TextSize = _layoutTemlate.ProductName.TextSize;
+                    l.ProductName.Color = _layoutTemlate.ProductName.Color;
 
-                    b.Sku.Top = b.Top + _layoutTemlate.Sku.Top;
-                    b.Sku.Left = CalculateCenteredTextX(_layoutTemlate.Sku.TextSize, b.Sku.Title, b.Left);
+                    l.SalePrice.Top = l.Top + _layoutTemlate.SalePrice.Top;
+                    l.SalePrice.Left = CalculateCenteredTextX(_layoutTemlate.SalePrice.TextSize, l.SalePrice.Title, l.Left);
+                    l.SalePrice.TextSize = _layoutTemlate.SalePrice.TextSize;
+                    l.SalePrice.Color = _layoutTemlate.SalePrice.Color;
 
-                    b.Barcode.Top = b.Top + _layoutTemlate.Barcode.Top;
-                    b.Barcode.Left = b.Left + _layoutTemlate.Barcode.Left + 50;
+                    l.Sku.Top = l.Top + _layoutTemlate.Sku.Top;
+                    l.Sku.Left = CalculateCenteredTextX(_layoutTemlate.Sku.TextSize, l.Sku.Title, l.Left);
+                    l.Sku.TextSize = _layoutTemlate.Sku.TextSize;
+                    l.Sku.Color = _layoutTemlate.Sku.Color;
+
+                    l.Barcode.Top = l.Top + _layoutTemlate.Barcode.Top;
+                    l.Barcode.Left = l.Left + _layoutTemlate.Box.Padding;
+                    l.Barcode.TextSize = _layoutTemlate.Barcode.TextSize;
+                    l.Barcode.Color = _layoutTemlate.Barcode.Color;
+                    l.Barcode.Width = _layoutTemlate.Box.Width - (2 * _layoutTemlate.Box.Padding);
+                    l.Barcode.Height = _layoutTemlate.Barcode.Height;
                 });
 
             });
