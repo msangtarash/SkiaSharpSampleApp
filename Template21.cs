@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SkiaSharpSampleApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkiaSharpSampleApp.Models
+namespace SkiaSharpSampleApp
 {
     public class Template21
     {
@@ -27,34 +28,34 @@ namespace SkiaSharpSampleApp.Models
                     Padding = 1.2f * _toPixel,
 
                     StrokeWidth = 1,
-                    YReduce = 5,
-                    XReduce = 5,
+                    YReduce = 10,
+                    XReduce = 10,
                 },
                 BusinessName = new LabelDimensions
                 {
                     TextSize = 7 * _toPixel,
-                    Top = 6 * _toPixel,
+                    Top = 7 * _toPixel,
                 },
                 ProductName = new LabelDimensions
                 {
                     TextSize = 3 * _toPixel,
-                    Top = 20 * _toPixel,
+                    Top = 19 * _toPixel,
                 },
                 SalePrice = new LabelDimensions
                 {
                     TextSize = 5 * _toPixel,
-                    Top = 17 * _toPixel,
+                    Top = 16 * _toPixel,
                 },
                 Sku = new LabelDimensions
                 {
                     TextSize = 3 * _toPixel,
-                    Top = 26 * _toPixel,
+                    Top = 24 * _toPixel,
                 },
                 Barcode = new LabelDimensions
                 {
-                    Top = 28 * _toPixel,
+                    Top = 26 * _toPixel,
                     Width = 350,
-                    Height = 50,
+                    Height = 80,
                 },
             };
         }
