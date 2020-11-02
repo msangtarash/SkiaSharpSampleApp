@@ -14,14 +14,10 @@ namespace SkiaSharpSampleApp
 {
     public class LabelDrawer
     {
-        private LayoutTemlate _layoutTemlate;
-
         private List<LabelPage> _pages;
 
-        public LabelDrawer(LayoutTemlate layoutTemlate, List<LabelPage> pages)
+        public LabelDrawer(List<LabelPage> pages)
         {
-            _layoutTemlate = layoutTemlate;
-
             _pages = pages;
         }
 
@@ -32,7 +28,7 @@ namespace SkiaSharpSampleApp
 
         private void CreateImage(LabelPage labelPage)
         {
-            SKImageInfo imageInfo = new SKImageInfo(_layoutTemlate.PageWidthInt, _layoutTemlate.PageHeightInt);
+            SKImageInfo imageInfo = new SKImageInfo(labelPage.Width, labelPage.Height);
             using SKSurface surface = SKSurface.Create(imageInfo);
             SKCanvas canvas = surface.Canvas;
             DrawOnCanvas(canvas, labelPage);
@@ -55,7 +51,7 @@ namespace SkiaSharpSampleApp
 
         public void CreatePdf(LabelPage labelPage, SKDocument document)
         {
-            using SKCanvas pdfCanvas = document.BeginPage(_layoutTemlate.PageWidthInt, _layoutTemlate.PageHeightInt);
+            using SKCanvas pdfCanvas = document.BeginPage(labelPage.Width, labelPage.Height);
 
             DrawOnCanvas(pdfCanvas, labelPage);
         }

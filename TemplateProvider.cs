@@ -7,9 +7,18 @@ using System.Threading.Tasks;
 
 namespace SkiaSharpSampleApp
 {
-    public class Template21
+    public class TemplateProvider
     {
-        public LayoutTemlate GetTemplate21(float _toPixel)
+        private readonly int _dpi;
+        private readonly float _toPixel;
+
+        public TemplateProvider(int dpi)
+        {
+            _dpi = dpi;
+            _toPixel = _dpi / 25.4f;
+        }
+
+        public LayoutTemlate GetTemplate21()
         {
             return new LayoutTemlate
             {
@@ -58,6 +67,11 @@ namespace SkiaSharpSampleApp
                     Height = 80,
                 },
             };
+        }
+
+        public LayoutTemlate GetTemplate40()
+        {
+            return new LayoutTemlate(); // TODO: complete layout 40
         }
     }
 }

@@ -29,6 +29,8 @@ namespace SkiaSharpSampleApp
 
             labelPages.ForEach(p =>
             {
+                p.Width = _layoutTemlate.PageWidthInt;
+                p.Height = _layoutTemplate.PageHeightInt;
                 p.Labels = labelBoxes.Skip((p.PageNumber - 1) * pageSize).Take(pageSize).ToList();
 
                 var index = 0;
